@@ -3,11 +3,11 @@
 
 
 **Структура файлов:**
-
-**jirasearcher.py** - скрипт для поиска задач в JIRA по ключевым словам и создания отчета в формате Google Sheets.
-**sheetsearcher.py** - скрипт для поиска и фильтрации данных в Google Sheets.
-**starter.py** - скрипт для запуска процесса обработки данных в Google Sheets и JIRA.
-
+```
+jirasearcher.py - скрипт для поиска задач в JIRA по ключевым словам и создания отчета в формате Google Sheets.
+sheetsearcher.py - скрипт для поиска и фильтрации данных в Google Sheets.
+starter.py - скрипт для запуска процесса обработки данных в Google Sheets и JIRA.
+```
 
 
 **Использование:**
