@@ -4,7 +4,6 @@ import jirasearcher
 import sheetsearcher
 import time
 import gspread
-import os
 
 # Список площадок, которые нужно проверить
 placed = {
