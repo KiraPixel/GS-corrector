@@ -18,3 +18,6 @@ build/starter/Tree-02.toc
 build/starter/warn-starter.txt
 build/starter/xref-starter.html
 starter.spec
+*.ico
+dist/config.json
+config.json
