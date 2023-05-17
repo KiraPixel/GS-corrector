@@ -53,3 +53,5 @@ starter.py - скрипт для запуска процесса обработ�
     }
 }
 ```
+![image](https://github.com/KiraPixel/GS-corrector/assets/90696175/8ff1d2ba-ad79-4210-8c6d-f64072c0a5e0) ![image](https://github.com/KiraPixel/GS-corrector/assets/90696175/8547e605-d2e9-4769-b9e1-7d281da743a6)
+
