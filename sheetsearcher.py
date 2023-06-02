@@ -21,6 +21,7 @@ class Placed:
         self.column_date = self.placed_data['date_row']
         self.sheet_name = self.placed_data['sheet_name']
         self.sheet_url = self.placed_data['google_sheet_link']
+        self.jira_project = self.placed_data['jira_project']
 
 
 def start_search(placed_name):
@@ -35,7 +36,7 @@ def start_search(placed_name):
     cells = [{'value': value_cell.value, 'row': value_cell.row, 'col': value_cell.col,
               'to_date': date_cell.value} for value_cell, date_cell in zip(value_range, date_range)]
 
-    return cells
+    return cells, placed_data.jira_project
 
 
 # корректор дат

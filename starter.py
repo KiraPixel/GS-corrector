@@ -12,13 +12,14 @@ from ttkbootstrap.widgets import Button
 import jirasearcher
 import sheetsearcher
 
+version = "v.2"
 
 class ParserGUI:
     def __init__(self):
         # Инициализация GUI
         self.style = Style(theme='darkly')
         self.window = self.style.master
-        self.window.title("Парсер данных")
+        self.window.title("GS-Corrector " + version)
         self.window.iconbitmap('icon.ico')
         self.window.geometry("400x450")
         self.window.resizable(True, False)
@@ -99,20 +100,21 @@ class ParserGUI:
     def search(self, placed_name):
         # Метод для выполнения поиска данных для конкретной площадки
         self.log(f"Начинаю парсер площадки {placed_name}")
-        cells = sheetsearcher.start_search(placed_name)
+        cells, jira_project_name = sheetsearcher.start_search(placed_name)
 
         for cell in cells:
             if self.stop_event.is_set():
                 break
-
             if cell['value'] != "":
                 sheets_date = cell['to_date']
 
-                jira_date_set = jirasearcher.start_search(cell['value'])  # Поиск даты в Jira
-
-                jira_date_str = next(iter(jira_date_set))
-                jira_date_obj = datetime.strptime(jira_date_str, '%Y-%m-%dT%H:%M:%S.%f%z')
-                formatted_jira_date = jira_date_obj.strftime('%d.%m.%Y')
+                jira_date_set = jirasearcher.start_search(cell['value'], jira_project_name)  # Поиск даты в Jira
+                if jira_date_set is None:
+                    formatted_jira_date = ('12.02.1900')
+                else:
+                    jira_date_str = next(iter(jira_date_set))
+                    jira_date_obj = datetime.strptime(jira_date_str, '%Y-%m-%dT%H:%M:%S.%f%z')
+                    formatted_jira_date = jira_date_obj.strftime('%d.%m.%Y')
 
                 if sheets_date == formatted_jira_date:
                     # Если дата в Google Sheets совпадает с датой в Jira, записать соответствующее сообщение в лог
