@@ -19,6 +19,7 @@ class Placed:
         self.start_row = self.placed_data['start_row']
         self.column_value = self.placed_data['garage_num_row']
         self.column_date = self.placed_data['date_row']
+        self.column_date_text = self.placed_data['date_row_text']
         self.sheet_name = self.placed_data['sheet_name']
         self.sheet_url = self.placed_data['google_sheet_link']
         self.jira_project = self.placed_data['jira_project']
@@ -39,9 +40,13 @@ def start_search(placed_name):
     return cells, placed_data.jira_project
 
 
-# корректор дат
-def replace_on_correct(row, new_date, placed_name):
+def insert_dates_to_table(new_data, placed_name):
     placed_data = Placed(placed_name)
     sheet = client.open_by_url(placed_data.sheet_url)
     worksheet = sheet.worksheet(placed_data.sheet_name)
-    worksheet.update_cell(row, placed_data.column_date, new_date)
+
+    # Создание массива из значений 'to_date'
+    date_array = [[item['to_date']] for item in new_data]
+    # Вставка массива в таблицу
+    column_range = f'{placed_data.column_date_text}{placed_data.start_row}:{placed_data.column_date_text}'
+    worksheet.update(column_range, date_array)
